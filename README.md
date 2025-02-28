@@ -44,3 +44,49 @@ En vous connectant sur https://sonarqube.apps.openshift.kakor.ovh en utilisant l
 ```
 
 > Attention à mettre votre token dans les secret github et à modifier le fichier `sonar-project.properties` pour que le nom de projet soit dépendant du groupe
+
+## Exercice 6
+
+Mise en place du Helm. 
+
+Afin de pouvoir déployer notre application, il va falloir créer une nouvelle chart helm basée sur l'ébauche du dossier ```librairie-helm``` .
+
+Pour créer la chart helm, voici les consignes à suivre :
+
+- Ajoutez un deployment `python` dans templates. Variabilisez le nom de l'image et exposez le port 5000.
+- Ajoutez un service du même nom qui va pointer sur le port 5000 du déploiement afin de relier celui-ci au service.  
+
+## Exercice 7
+
+A partir de l'image harbor.kakor.ovh/public/oc-helm:1.0 créez une pipeline Github qui va lancer les actions suivantes : 
+
+S'authentifier au cluster à partir d'un token généré à partir de l'interface graphique d'openshift ( https://console-openshift-console.apps.openshift.kakor.ovh ) :
+```oc login ....```
+
+Puis déployez l'application avec helm en utilisant le sha du commit pour coller à la version de l'image :
+``` helm upgrade --install groupe-x librairie-helm/ --set image=<urlimage>:${{ github.sha }} ```
+
+## Exercice 8
+
+A partir de l'exemple ci-dessous, créez une règle sur un port TCP de votre choix qui va utiliser la Security Group :
+
+```
+---
+apiVersion: networking.openstack.crossplane.io/v1alpha1
+kind: SecgroupV2
+metadata:
+  name: example-security-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    name: "exemple-nsg"
+    description: "Example security group"
+    region: "RegionOne"
+    tenantId: "2e4f56f043fc49db886d5d54625cad33"
+  providerConfigRef:
+    name: provider-openstack-config
+```
+
+Basez-vous sur la description de l'api https://marketplace.upbound.io/providers/crossplane-contrib/provider-openstack/v0.4.0/resources/networking.openstack.crossplane.io/SecgroupRuleV2/v1alpha1 comme fait pendant le cours. 
+
+Créez le fichier dans la chart helm et redéployez. 
