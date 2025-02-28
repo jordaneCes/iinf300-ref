@@ -30,9 +30,7 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: harbor.kakor.ovh/ipi/groupe-3
-          tags: |
-              type=sha
-              harbor.kakor.ovh/ipi/groupe-3:toto 
+          tags: toto 
   
       - name: Build and push Docker images
         id: push
