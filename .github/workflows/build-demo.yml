@@ -64,7 +64,6 @@ jobs:
   hadolint:
     name: Hadolint
     runs-on: ubuntu-latest
-    needs: lint_python
     steps:
       - uses: actions/checkout@v4
       - uses: hadolint/hadolint-action@v3.1.0
