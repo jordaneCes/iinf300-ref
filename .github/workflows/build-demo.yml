@@ -40,15 +40,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           
-    lint_python:
-      name: Lint Python Code
-      runs-on: ubuntu-latest
-      steps:
-        - name: Python Linter
-          uses: sunnysid3up/python-linter@master
-          with:
-             source: "src"
-             mypy-options: "--ignore-missing-imports --show-error-codes"
-             pylint-options: "--rcfile=setup.cfg"
-             isort-options: "-w 100"
-             django: true
+  lint_python:
+    name: Lint Python Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Python Linter
+        uses: sunnysid3up/python-linter@master
+        with:
+            source: "src"
+            mypy-options: "--ignore-missing-imports --show-error-codes"
+            pylint-options: "--rcfile=setup.cfg"
+            isort-options: "-w 100"
+            django: true
