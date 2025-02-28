@@ -59,3 +59,12 @@ jobs:
             mypy-options: "--ignore-missing-imports --show-error-codes"
             isort-options: "-w 100"
             pylint-options: "--disable=F0010"
+            
+  hadolint:
+    name: Hadolint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: docker/Dockerfile
