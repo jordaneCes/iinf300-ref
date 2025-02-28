@@ -58,3 +58,4 @@ jobs:
             source: "docker/app"
             mypy-options: "--ignore-missing-imports --show-error-codes"
             isort-options: "-w 100"
+            pylint-options: "--disable=F0010"
