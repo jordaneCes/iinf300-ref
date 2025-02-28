@@ -69,3 +69,16 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: docker/Dockerfile
+
+  test_curl:
+    name: On test !
+    runs-on: ubuntu-latest
+    needs: push_to_registries
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+            image: aschmelyun/cleaver:latest
+            run: |
+                curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
