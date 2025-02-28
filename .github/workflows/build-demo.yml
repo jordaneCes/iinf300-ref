@@ -14,8 +14,6 @@ jobs:
       contents: read
       attestations: write
       id-token: write
-    outputs:
-      image_tag: ${{ steps.push.outputs.tags }}  # Définir un output avec le tag de l'image
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -79,9 +77,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run the build process with Docker
-        run: |
-          IMAGE_TAG=harbor.kakor.ovh/ipi/groupe-3:${{ needs.push_to_registries.outputs.image_tag }}
-          echo "Running Docker container with image: $IMAGE_TAG"
-          docker run -d -p 5000:5000 $IMAGE_TAG
+        #run: docker run -d -p 5000:5000 harbor.kakor.ovh/ipi/groupe-3:
       - name: test curl
         run: sleep 10 && curl --header "Content-Type:application/json" http://localhost:5000/librairie/livres -d '{"titre":"DevSecOps DEAVSETS", "auteur":"Jordan Assouline"}'
